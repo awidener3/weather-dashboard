@@ -20,30 +20,30 @@
     <div class="container-fluid">
         <div class="row">
             <!-- LEFT COLUMN -->
-            <div class="col-3">
+            <div class="col-12 col-md-3">
                 <h2>Search for a City:</h2>
                 <!-- CITY SEARCH FORM -->
                 <form class="border-bottom mb-2">
-                    <input type="text" class="form-control mb-2" id="city-input" placeholder="Orlando">
-                    <button class="btn btn-primary btn-block mb-2" id="city-input-btn">Search</button>
+                    <input type="text" class="form-control mb-2" id="city-search" placeholder="Orlando">
+                    <button class="btn btn-primary btn-block mb-2" id="city-search-btn">Search</button>
                 </form>
 
                 <!-- SEARCH HISTORY BUTTONS -->
-                <button class="btn btn-secondary btn-block mb-2" id="searched-cities-btn">New York</button>
-                <button class="btn btn-secondary btn-block mb-2" id="searched-cities-btn">Chicago</button>
-                <button class="btn btn-secondary btn-block mb-2" id="searched-cities-btn">Austin</button>
-                <button class="btn btn-secondary btn-block mb-2" id="searched-cities-btn">San Francisco</button>
-                <button class="btn btn-secondary btn-block mb-2" id="searched-cities-btn">Seattle</button>
-                <button class="btn btn-secondary btn-block mb-2" id="searched-cities-btn">Denver</button>
-                <button class="btn btn-secondary btn-block mb-2" id="searched-cities-btn">Atlanta</button>
-                <button class="btn btn-secondary btn-block mb-2" id="searched-cities-btn">San Diego</button>
+                <button class="btn btn-secondary btn-block mb-2 searched-cities-btn">New York</button>
+                <button class="btn btn-secondary btn-block mb-2 searched-cities-btn">Chicago</button>
+                <button class="btn btn-secondary btn-block mb-2 searched-cities-btn">Austin</button>
+                <button class="btn btn-secondary btn-block mb-2 searched-cities-btn">San Francisco</button>
+                <button class="btn btn-secondary btn-block mb-2 searched-cities-btn">Seattle</button>
+                <button class="btn btn-secondary btn-block mb-2 searched-cities-btn">Denver</button>
+                <button class="btn btn-secondary btn-block mb-2 searched-cities-btn">Atlanta</button>
+                <button class="btn btn-secondary btn-block mb-2 searched-cities-btn">San Diego</button>
             </div>
 
             <!-- RIGHT COLUMN -->
-            <div class="col-9">
+            <div class="col-12 col-md-9">
                 <div class="row">
-                    <div class="col-12 card">
-                        <h2><span id="main-card-city">Atlanta</span> <span id="main-card-date">(1/7/2022)</span> <i>Icon Goes Here</i></h2>
+                    <div id="main-card" class="col-12 card p-3">
+                        <h2><span id="main-card-city">Atlanta</span> <span id="main-card-date">(1/7/2022)</span> <i id="main-card-icon">Icon Goes Here</i></h2>
                         <p>Temp: <span id="main-card-temp">74</span>&deg; F</p>
                         <p>Wind: <span id="main-card-wind">6.67</span> MPH</p>
                         <p>Humidity: <span id="main-card-humidity">46</span>%</p>
@@ -51,51 +51,51 @@
                     </div>
                 </div>
                 <!-- 5-DAY FORECAST -->
-                <div class="row d-flex justify-content-around">
+                <div class="row d-flex justify-content-around mt-3">
                     <h3 class="col-12">5-Day Forecast</h3>
                     <!-- DAY 1 -->
-                    <div class="col-2 card bg-dark text-light p-2 m-1">
-                        <h4 id="forecast-date">1/8/2022</h4>
-                        <i>Icon Goes Here</i>
-                        <p>Temp: <span id="forecast-card-temp">74</span>&deg; F</p>
-                        <p>Wind: <span id="forecast-card-wind">6.67</span> MPH</p>
-                        <p>Humidity: <span id="forecast-card-humidity">46</span>%</p>
+                    <div class="col-12 col-sm-12 col-md-2 card bg-dark text-light p-2 m-1">
+                        <h4 class="forecast-date">1/8/2022</h4>
+                        <i class="forecast-icon">Icon Goes Here</i>
+                        <p>Temp: <span class="forecast-card-temp">74</span>&deg; F</p>
+                        <p>Wind: <span class="forecast-card-wind">6.67</span> MPH</p>
+                        <p>Humidity: <span class="forecast-card-humidity">46</span>%</p>
                     </div>
 
                     <!-- DAY 2 -->
-                    <div class="col-2 card bg-dark text-light p-2 m-1">
-                        <h4 id="forecast-date">1/8/2022</h4>
+                    <div class="col-12 col-sm-12 col-md-2 card bg-dark text-light p-2 m-1">
+                        <h4 class="forecast-date">1/8/2022</h4>
                         <i>Icon Goes Here</i>
-                        <p>Temp: <span id="forecast-card-temp">74</span>&deg; F</p>
-                        <p>Wind: <span id="forecast-card-wind">6.67</span> MPH</p>
-                        <p>Humidity: <span id="forecast-card-humidity">46</span>%</p>
+                        <p>Temp: <span class="forecast-card-temp">74</span>&deg; F</p>
+                        <p>Wind: <span class="forecast-card-wind">6.67</span> MPH</p>
+                        <p>Humidity: <span class="forecast-card-humidity">46</span>%</p>
                     </div>
 
                     <!-- DAY 3 -->
-                    <div class="col-2 card bg-dark text-light p-2 m-1">
-                        <h4 id="forecast-date">1/8/2022</h4>
+                    <div class="col-12 col-sm-12 col-md-2 card bg-dark text-light p-2 m-1">
+                        <h4 class="forecast-date">1/8/2022</h4>
                         <i>Icon Goes Here</i>
-                        <p>Temp: <span id="forecast-card-temp">74</span>&deg; F</p>
-                        <p>Wind: <span id="forecast-card-wind">6.67</span> MPH</p>
-                        <p>Humidity: <span id="forecast-card-humidity">46</span>%</p>
+                        <p>Temp: <span class="forecast-card-temp">74</span>&deg; F</p>
+                        <p>Wind: <span class="forecast-card-wind">6.67</span> MPH</p>
+                        <p>Humidity: <span class="forecast-card-humidity">46</span>%</p>
                     </div>
 
                     <!-- DAY 4 -->
-                    <div class="col-2 card bg-dark text-light p-2 m-1">
-                        <h4 id="forecast-date">1/8/2022</h4>
+                    <div class="col-12 col-sm-12 col-md-2 card bg-dark text-light p-2 m-1">
+                        <h4 class="forecast-date">1/8/2022</h4>
                         <i>Icon Goes Here</i>
-                        <p>Temp: <span id="forecast-card-temp">74</span>&deg; F</p>
-                        <p>Wind: <span id="forecast-card-wind">6.67</span> MPH</p>
-                        <p>Humidity: <span id="forecast-card-humidity">46</span>%</p>
+                        <p>Temp: <span class="forecast-card-temp">74</span>&deg; F</p>
+                        <p>Wind: <span class="forecast-card-wind">6.67</span> MPH</p>
+                        <p>Humidity: <span class="forecast-card-humidity">46</span>%</p>
                     </div>
 
                     <!-- DAY 5 -->
-                    <div class="col-2 card bg-dark text-light p-2 m-1">
-                        <h4 id="forecast-date">1/8/2022</h4>
+                    <div class="col-12 col-sm-12 col-md-2 card bg-dark text-light p-2 m-1">
+                        <h4 class="forecast-date">1/8/2022</h4>
                         <i>Icon Goes Here</i>
-                        <p>Temp: <span id="forecast-card-temp">74</span>&deg; F</p>
-                        <p>Wind: <span id="forecast-card-wind">6.67</span> MPH</p>
-                        <p>Humidity: <span id="forecast-card-humidity">46</span>%</p>
+                        <p>Temp: <span class="forecast-card-temp">74</span>&deg; F</p>
+                        <p>Wind: <span class="forecast-card-wind">6.67</span> MPH</p>
+                        <p>Humidity: <span class="forecast-card-humidity">46</span>%</p>
                     </div>
                 </div>
             </div>

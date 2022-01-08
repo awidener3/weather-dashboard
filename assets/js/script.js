@@ -4,29 +4,58 @@ let weatherApiUrl = ''; // TODO: add api url
 let weatherApiKey = ''; // TODO: sign up for API and insert key
 
 // === DOM ELEMENTS === \\
-// TODO: search button
-// TODO: search input/form
-// TODO: main card
-// TODO: forecast cards
-// TODO: localStorage buttons
+const searchButton = document.querySelector('#city-search-btn');
+const searchInput = document.querySelector('#city-search').value;
+
+const mainCardCity = document.querySelector('#main-card-city');
+const mainCardDate = document.querySelector('#main-card-date');
+const mainCardIcon = document.querySelector('#main-card-icon');
+const mainCardTemp = document.querySelector('#main-card-temp');
+const mainCardWind = document.querySelector('#main-card-wind');
+const mainCardHumidity = document.querySelector('#main-card-humidity');
+const mainCardUv = document.querySelector('#main-card-uv');
+
+const forecastCardDate = document.querySelectorAll('.forecast-date');
+const forecastCardIcon = document.querySelectorAll('.forecast-icon');
+const forecastCardTemp = document.querySelectorAll('.forecast-temp');
+const forecastCardWind = document.querySelectorAll('.forecast-wind');
+const forecastCardHumidity = document.querySelectorAll('.forecast-humidity');
+
+const searchedCitiesButton = document.querySelectorAll('.searched-cities-btn')
 
 // === FUNCTIONS === \\
 
-renderSearchHistory = () => {};
+renderSearchHistory = () => {
 
-renderCurrentWeather = () => {};
+};
 
-renderForecast = () => {};
+renderCurrentWeather = () => {
 
-renderForecastCards = () => {};
+};
 
-appendToSearchHistory = () => {};
+renderForecast = () => {
 
-fetchWeather = () => {};
+};
 
-fetchCityCoords = () => {};
+renderForecastCards = () => {
 
-handFormSubmit = () => {};
+};
+
+appendToSearchHistory = () => {
+
+};
+
+fetchWeather = () => {
+
+};
+
+fetchCityCoords = () => {
+
+};
+
+handFormSubmit = () => {
+    
+};
 
 // === EVENT LISTENERS === \\
 // TODO: create an event listener for the search button that takes the city and returns the coords
