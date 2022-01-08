@@ -1,11 +1,7 @@
-// === GLOBAL VARIABLES === \\
-let searchHistory = [];
-let weatherApiUrl = ''; // TODO: add api url
-let weatherApiKey = ''; // TODO: sign up for API and insert key
-
 // === DOM ELEMENTS === \\
+
 const searchButton = document.querySelector('#city-search-btn');
-const searchInput = document.querySelector('#city-search').value;
+const searchInput = document.querySelector('#city-search');
 
 const mainCardCity = document.querySelector('#main-card-city');
 const mainCardDate = document.querySelector('#main-card-date');
@@ -22,6 +18,22 @@ const forecastCardWind = document.querySelectorAll('.forecast-wind');
 const forecastCardHumidity = document.querySelectorAll('.forecast-humidity');
 
 const searchedCitiesButton = document.querySelectorAll('.searched-cities-btn')
+
+// === GLOBAL VARIABLES === \\
+
+let searchHistory = [];
+let weatherApiUrl = 'https://api.openweathermap.org';
+let weatherApiKey = '&appid=3dcebf80294bbadbeab3a3d24374fc77';
+let geocodingEndpoint = '/geo/1.0/direct?';
+
+// fetch('http://api.openweathermap.org/geo/1.0/direct?q=orlando&appid=3dcebf80294bbadbeab3a3d24374fc77')
+//     .then(function(response) {
+//         console.log(response);
+//         return response.json();
+//     })
+//     .then(function(data) {
+//         console.log(data);
+//     })
 
 // === FUNCTIONS === \\
 
@@ -49,16 +61,30 @@ fetchWeather = () => {
 
 };
 
-fetchCityCoords = () => {
+fetchCityCoords = (cityName) => {
+    let apiParam = `q=${cityName}`;
 
+    fetch(`${weatherApiUrl}${geocodingEndpoint}${apiParam}${weatherApiKey}`)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            console.log(data);
+        });
 };
 
-handFormSubmit = () => {
-    
+handleFormSubmit = () => {
+    let cityName = searchInput.value.toLowerCase().trim();
+    searchInput.value = '';
+
+    fetchCityCoords(cityName);
 };
 
 // === EVENT LISTENERS === \\
-// TODO: create an event listener for the search button that takes the city and returns the coords
+searchButton.addEventListener('click', function (event) {
+    event.preventDefault();
+    handleFormSubmit();
+});
 
 // === PSEUDOCODE === \\
 
