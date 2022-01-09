@@ -24,7 +24,11 @@ const searchedCitiesButton = document.querySelectorAll('.searched-cities-btn')
 let searchHistory = [];
 let weatherApiUrl = 'https://api.openweathermap.org';
 let weatherApiKey = '&appid=3dcebf80294bbadbeab3a3d24374fc77';
+let oneCallEndpoint = '/data/2.5/onecall?';
 let geocodingEndpoint = '/geo/1.0/direct?';
+
+let cityName;
+let coords;
 
 // fetch('http://api.openweathermap.org/geo/1.0/direct?q=orlando&appid=3dcebf80294bbadbeab3a3d24374fc77')
 //     .then(function(response) {
@@ -58,25 +62,29 @@ appendToSearchHistory = () => {
 };
 
 fetchWeather = () => {
+    let latParam = `lat=${coords[0]}`;
+    let lonParam = `lon=${coords[1]}`;
 
+    fetch(`${weatherApiUrl}${oneCallEndpoint}${latParam}&${lonParam}&units=imperial${weatherApiKey}`)
+        .then(response => response.json())
+        .then(data => console.log(data));
 };
 
 fetchCityCoords = (cityName) => {
     let apiParam = `q=${cityName}`;
 
     fetch(`${weatherApiUrl}${geocodingEndpoint}${apiParam}${weatherApiKey}`)
-        .then(function(response) {
-            return response.json();
+        .then (response => response.json())
+        .then (data => {
+            coords = [data[0].lat, data[0].lon]
         })
-        .then(function(data) {
-            console.log(data);
-        });
+        .catch (error => alert(error.message))
 };
 
 handleFormSubmit = () => {
-    let cityName = searchInput.value.toLowerCase().trim();
+    cityName = searchInput.value.toLowerCase().trim();
     searchInput.value = '';
-
+    
     fetchCityCoords(cityName);
 };
 
