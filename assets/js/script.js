@@ -28,7 +28,8 @@ let oneCallEndpoint = '/data/2.5/onecall?';
 let geocodingEndpoint = '/geo/1.0/direct?';
 
 let cityName;
-// let coords;
+let today = moment().format('M/DD/YYYY')
+mainCardDate.textContent = `(${today})`
 
 // * geocode
 // fetch('https://api.openweathermap.org/geo/1.0/direct?q=orlando&appid=3dcebf80294bbadbeab3a3d24374fc77')
@@ -55,46 +56,36 @@ let cityName;
 async function handleFormSubmit () {
     let apiParam = `q=${cityName}`;
 
-    // read JSON
-    let geocodeResponse = await fetch(`${weatherApiUrl}${geocodingEndpoint}${apiParam}${weatherApiKey}`);
-    let coordinatesData = await geocodeResponse.json();
-    let latParam = await coordinatesData[0].lat;
-    let lonParam = await coordinatesData[0].lon;
+    try {
+        // read geocode
+        let geocodeResponse = await fetch(`${weatherApiUrl}${geocodingEndpoint}${apiParam}${weatherApiKey}`);
+        let coordinatesData = await geocodeResponse.json();
+        let latParam = await coordinatesData[0].lat;
+        let lonParam = await coordinatesData[0].lon;
+        console.log(coordinatesData);
+        
+        // read coordinates
+        let openWeatherResponse = await fetch(`${weatherApiUrl}${oneCallEndpoint}lat=${latParam}&lon=${lonParam}&units=imperial${weatherApiKey}`);
+        let openWeatherData = await openWeatherResponse.json();
+        console.log(openWeatherData);
 
-    // read coordinates
-    let openWeatherResponse = await fetch(`${weatherApiUrl}${oneCallEndpoint}lat=${latParam}&lon=${lonParam}&units=imperial${weatherApiKey}`);
-    let openWeatherData = await openWeatherResponse.json();
+        renderCurrentWeather(coordinatesData, openWeatherData);
+    } catch (err) {
+        alert('whoops!');
+    }
 };
-
-// fetchWeather = () => {
-//     let latParam = `lat=${coords[0]}`;
-//     let lonParam = `lon=${coords[1]}`;
-
-//     fetch(`${weatherApiUrl}${oneCallEndpoint}${latParam}&${lonParam}&units=imperial${weatherApiKey}`)
-//         .then(response => response.json())
-//         .then(data => console.log(data));
-// };
-
-// fetchCityCoords = () => {
-//     let apiParam = `q=${cityName}`;
-//     let coords;
-
-    // fetch(`${weatherApiUrl}${geocodingEndpoint}${apiParam}${weatherApiKey}`)
-        // .then (response => response.json())
-//         .then (data => {
-//             coords = [data[0].lat, data[0].lon]
-//             console.log(coords);
-//             return coords;
-//         })
-//         .catch (error => alert(error.message))
-// };
 
 renderSearchHistory = () => {
 
 };
 
-renderCurrentWeather = () => {
-
+renderCurrentWeather = (coordinatesData, openWeatherData) => {
+    mainCardCity.textContent = coordinatesData[0].name;
+    mainCardIcon.src = `http://openweathermap.org/img/wn/${openWeatherData.current.weather[0].icon}.png`
+    mainCardTemp.textContent = openWeatherData.current.temp;
+    mainCardWind.textContent = openWeatherData.current.wind_speed;
+    mainCardHumidity.textContent = openWeatherData.current.humidity;
+    mainCardUv.textContent = openWeatherData.current.uvi;
 };
 
 renderForecast = () => {
