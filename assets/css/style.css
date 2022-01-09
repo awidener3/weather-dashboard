@@ -1,0 +1,8 @@
+#main-card-city {
+    font-weight: bold;
+}
+
+.forecast-card img{
+    margin: 0 auto;
+    width: 40%;
+}
