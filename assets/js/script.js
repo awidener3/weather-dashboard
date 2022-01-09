@@ -28,9 +28,20 @@ let oneCallEndpoint = '/data/2.5/onecall?';
 let geocodingEndpoint = '/geo/1.0/direct?';
 
 let cityName;
-let coords;
+// let coords;
 
-// fetch('http://api.openweathermap.org/geo/1.0/direct?q=orlando&appid=3dcebf80294bbadbeab3a3d24374fc77')
+// * geocode
+// fetch('https://api.openweathermap.org/geo/1.0/direct?q=orlando&appid=3dcebf80294bbadbeab3a3d24374fc77')
+//     .then(function(response) {
+//         console.log(response);
+//         return response.json();
+//     })
+//     .then(function(data) {
+//         console.log(data);
+//     })
+
+// * oneCall
+// fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=80&lon=80${weatherApiKey}`)
 //     .then(function(response) {
 //         console.log(response);
 //         return response.json();
@@ -40,6 +51,43 @@ let coords;
 //     })
 
 // === FUNCTIONS === \\
+
+async function handleFormSubmit () {
+    let apiParam = `q=${cityName}`;
+
+    // read JSON
+    let geocodeResponse = await fetch(`${weatherApiUrl}${geocodingEndpoint}${apiParam}${weatherApiKey}`);
+    let coordinatesData = await geocodeResponse.json();
+    let latParam = await coordinatesData[0].lat;
+    let lonParam = await coordinatesData[0].lon;
+
+    // read coordinates
+    let openWeatherResponse = await fetch(`${weatherApiUrl}${oneCallEndpoint}lat=${latParam}&lon=${lonParam}&units=imperial${weatherApiKey}`);
+    let openWeatherData = await openWeatherResponse.json();
+};
+
+// fetchWeather = () => {
+//     let latParam = `lat=${coords[0]}`;
+//     let lonParam = `lon=${coords[1]}`;
+
+//     fetch(`${weatherApiUrl}${oneCallEndpoint}${latParam}&${lonParam}&units=imperial${weatherApiKey}`)
+//         .then(response => response.json())
+//         .then(data => console.log(data));
+// };
+
+// fetchCityCoords = () => {
+//     let apiParam = `q=${cityName}`;
+//     let coords;
+
+    // fetch(`${weatherApiUrl}${geocodingEndpoint}${apiParam}${weatherApiKey}`)
+        // .then (response => response.json())
+//         .then (data => {
+//             coords = [data[0].lat, data[0].lon]
+//             console.log(coords);
+//             return coords;
+//         })
+//         .catch (error => alert(error.message))
+// };
 
 renderSearchHistory = () => {
 
@@ -61,37 +109,12 @@ appendToSearchHistory = () => {
 
 };
 
-fetchWeather = () => {
-    let latParam = `lat=${coords[0]}`;
-    let lonParam = `lon=${coords[1]}`;
-
-    fetch(`${weatherApiUrl}${oneCallEndpoint}${latParam}&${lonParam}&units=imperial${weatherApiKey}`)
-        .then(response => response.json())
-        .then(data => console.log(data));
-};
-
-fetchCityCoords = (cityName) => {
-    let apiParam = `q=${cityName}`;
-
-    fetch(`${weatherApiUrl}${geocodingEndpoint}${apiParam}${weatherApiKey}`)
-        .then (response => response.json())
-        .then (data => {
-            coords = [data[0].lat, data[0].lon]
-        })
-        .catch (error => alert(error.message))
-};
-
-handleFormSubmit = () => {
-    cityName = searchInput.value.toLowerCase().trim();
-    searchInput.value = '';
-    
-    fetchCityCoords(cityName);
-};
-
 // === EVENT LISTENERS === \\
 searchButton.addEventListener('click', function (event) {
     event.preventDefault();
+    cityName = searchInput.value.toLowerCase().trim();
     handleFormSubmit();
+    searchInput.value = '';
 });
 
 // === PSEUDOCODE === \\
