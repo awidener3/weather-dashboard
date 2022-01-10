@@ -59,6 +59,7 @@ async function fetchWeather () {
 // TODO: create main card dynamically
 renderCurrentWeather = (coordinatesData, openWeatherData) => {
     mainCardCity.textContent = coordinatesData[0].name;
+    // TODO: change 'http' to 'https' before finaliz
     mainCardIcon.src = `http://openweathermap.org/img/wn/${openWeatherData.current.weather[0].icon}@2x.png`
     mainCardTemp.textContent = Math.trunc(openWeatherData.current.temp);
     mainCardWind.textContent = openWeatherData.current.wind_speed;
@@ -69,6 +70,7 @@ renderCurrentWeather = (coordinatesData, openWeatherData) => {
 renderForecast = (openWeatherData) => {
     for (let i = 0; i < forecastCard.length; i++) {
         forecastCardDate[i].textContent = moment().add((i+1), 'days').format('M/DD/YYYY');
+        // TODO: change 'http' to 'https' before finalizing
         forecastCardIcon[i].src = `http://openweathermap.org/img/wn/${openWeatherData.daily[i].weather[0].icon}@2x.png`;
         forecastCardTemp[i].textContent = Math.trunc(openWeatherData.daily[i].temp.day);
         forecastCardWind[i].textContent = openWeatherData.daily[i].wind_speed;
