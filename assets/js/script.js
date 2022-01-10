@@ -89,6 +89,7 @@ renderForecast = (openWeatherData) => {
 // };
 
 renderSearchHistory = () => {
+    searchedButtons.textContent = '';
 
     for (let i = 0; i < searchHistory.length; i++) {
         let button = document.createElement('button');
@@ -108,8 +109,10 @@ renderSearchHistory = () => {
     }
 };
 
-appendToSearchHistory = () => {
-
+// TODO: Fix text remaining undercase and format for better UI
+appendToSearchHistory = (city) => {
+    searchHistory.unshift(city);
+    searchHistory.pop();
 };
 
 
@@ -117,6 +120,8 @@ appendToSearchHistory = () => {
 searchButton.addEventListener('click', function (event) {
     event.preventDefault();
     cityName = searchInput.value.toLowerCase().trim();
+    appendToSearchHistory(cityName);
+    renderSearchHistory();
     fetchWeather();
     searchInput.value = '';
 });
