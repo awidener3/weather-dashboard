@@ -36,14 +36,16 @@ fetchCoordinates = () => {
     let geocodingEndpoint = '/geo/1.0/direct?';
     let apiParam = `q=${cityName}`;
     
+    // calls for the coordinates from the geocode api
     fetch(`${weatherApiUrl}${geocodingEndpoint}${apiParam}${weatherApiKey}`)
         .then(function (response) {
-            console.log(response);
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
             fetchWeather(data);
+        })
+        .catch(function (error) {
+            alert('please enter a valid city name');
         })
 }
 
@@ -51,6 +53,7 @@ fetchWeather = (weatherData) => {
     let latParam = weatherData[0].lat;
     let lonParam = weatherData[0].lon;
 
+    // calls for weather information with collected lat and lon coordinates
     fetch(`${weatherApiUrl}${oneCallEndpoint}lat=${latParam}&lon=${lonParam}&units=imperial${weatherApiKey}`)
         .then(function (response) {
             return response.json();
