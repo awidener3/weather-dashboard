@@ -17,7 +17,8 @@ a:visited {
 /* MAIN CARD */
 
 #main-card,
-.forecast-card {
+.forecast-card,
+.search-card {
     box-shadow: 3px 3px 15px #4d4d4d;
 }
 
@@ -34,6 +35,20 @@ a:visited {
 
 #main-card-city {
     font-weight: bold;
+}
+
+#main-card-icon {
+    width: 60%;
+}
+
+.main-text {
+    font-size: 120%;
+}
+
+
+/* SEARCH CARD */
+.search-card {
+    background-color: blue;
 }
 
 /* FORECAST CARDS */
@@ -63,7 +78,7 @@ a:visited {
 .forecast-humidity {
     margin-left: 15px;
     text-align: center;
-    font-size: 150%;
+    font-size: 125%;
 }
 
 /* UV INDEX */

@@ -22,84 +22,113 @@
         <div class="row">
 
             <!-- === LEFT COLUMN === -->
-            <div class="col-12 col-md-3">
-                <h2>Search for a City:</h2>
-
-                <!-- CITY SEARCH FORM -->
-                <form class="border-bottom mb-2">
-                    <input type="text" class="form-control mb-2" id="city-search" placeholder="Enter a City">
-                    <button class="btn btn-primary btn-block mb-2" id="city-search-btn">Search</button>
-                </form>
-
-                <!-- SEARCH HISTORY BUTTONS -->
-                <div id="search-buttons"></div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-3">
+                <div id="search-card" class="card px-4 py-4 bg-dark text-light">
+                    <h2>Search for a City:</h2>
+    
+                    <!-- CITY SEARCH FORM -->
+                    <form class="border-bottom mb-2">
+                        <input type="text" class="form-control mb-2" id="city-search" placeholder="Enter a City" autocomplete="off">
+                        <button class="btn btn-primary btn-block mb-2" id="city-search-btn">Search</button>
+                    </form>
+    
+                    <!-- SEARCH HISTORY BUTTONS -->
+                    <div id="search-buttons"></div>
+                </div>
             </div>
 
             <!-- === RIGHT COLUMN === -->
-            <div class="col-12 col-md-9">
+            <div class="col-12 col-md-12 col-lg-9">
                 <div class="row p-3 m-1">
                     <!-- MAIN CARD -->
                     <div id="main-card" class=" card col-12 text-light p-3">
-                        <h2><span id="main-card-city"></span> <span id="main-card-date"></span> <img id="main-card-icon"></h2>
-                        <p>Temp: <span id="main-card-temp"></span></p>
-                        <p>Wind: <span id="main-card-wind"></span></p>
-                        <p>Humidity: <span id="main-card-humidity"></span></p>
-                        <a href="https://www.epa.gov/sunsafety/uv-index-scale-0" target="_blank"><p>UVI: <span id="main-card-uv"></span></p></a>
+                        <div class="row">
+                            <div class="col-12 col-lg-4 text-center p-4">
+                                <h2><span id="main-card-city"></span> <span id="main-card-date"></span></h2>
+                                <img id="main-card-icon">
+                            </div>
+                            <div class="col-12 col-lg-8 d-flex align-items-center justify-content-between">
+                                
+                                <div class="container">
+                                    <div class="row d-flex justify-content-around">
+                                        <div class="main-text col-12 col-lg-2 text-center border rounded m-2 p-2">
+                                            <p>Temp:</p>
+                                            <span id="main-card-temp"></span>
+                                        </div>
+                                        <div class="main-text col-12 col-lg-2 text-center border rounded m-2 p-2">
+                                            <p>Wind:</p>
+                                            <span id="main-card-wind"></span>
+                                        </div>
+                                        <div class="main-text col-12 col-lg-2 text-center border rounded m-2 p-2">
+                                            <p>Humidity:</p>
+                                            <span id="main-card-humidity"></span>
+                                        </div>
+                                        <div class="main-text col-12 col-lg-2 align-self-center">
+                                            <a href="https://www.epa.gov/sunsafety/uv-index-scale-0" target="_blank"><p>UVI: <span id="main-card-uv"></span></p></a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- ### 5-DAY FORECAST ### -->
-                <div class="row d-flex justify-content-around mt-3">
-                    <h3 class="col-12">5-Day Forecast</h3>
-                    <!-- DAY 1 -->
-                    <div class="col-12 col-sm-12 col-md-3 col-lg-2 card text-light p-2 m-1 forecast-card">
-                        <h4 class="forecast-date"></h4>
-                        <img class="forecast-icon">
-                        <p>Temp: <span class="forecast-temp">74</span></p>
-                        <p>Wind: <span class="forecast-wind">6.67</span></p>
-                        <p>Humidity: <span class="forecast-humidity">46</span></p>
-                    </div>
 
-                    <!-- DAY 2 -->
-                    <div class="col-12 col-sm-12 col-md-3 col-lg-2 card text-light p-2 m-1 forecast-card">
-                        <h4 class="forecast-date"></h4>
-                        <img class="forecast-icon">
-                        <p>Temp: <span class="forecast-temp">74</span></p>
-                        <p>Wind: <span class="forecast-wind">6.67</span></p>
-                        <p>Humidity: <span class="forecast-humidity">46</span></p>
-                    </div>
-
-                    <!-- DAY 3 -->
-                    <div class="col-12 col-sm-12 col-md-3 col-lg-2 card text-light p-2 m-1 forecast-card">
-                        <h4 class="forecast-date"></h4>
-                        <img class="forecast-icon">
-                        <p>Temp: <span class="forecast-temp">74</span></p>
-                        <p>Wind: <span class="forecast-wind">6.67</span></p>
-                        <p>Humidity: <span class="forecast-humidity">46</span></p>
-                    </div>
-
-                    <!-- DAY 4 -->
-                    <div class="col-12 col-sm-12 col-md-3 col-lg-2 card text-light p-2 m-1 forecast-card">
-                        <h4 class="forecast-date"></h4>
-                        <img class="forecast-icon">
-                        <p>Temp: <span class="forecast-temp">74</span></p>
-                        <p>Wind: <span class="forecast-wind">6.67</span></p>
-                        <p>Humidity: <span class="forecast-humidity">46</span></p>
-                    </div>
-
-                    <!-- DAY 5 -->
-                    <div class="col-12 col-sm-12 col-md-3 col-lg-2 card text-light p-2 m-1 forecast-card">
-                        <h4 class="forecast-date"></h4>
-                        <img class="forecast-icon">
-                        <p>Temp: <span class="forecast-temp">74</span></p>
-                        <p>Wind: <span class="forecast-wind">6.67</span></p>
-                        <p>Humidity: <span class="forecast-humidity">46</span></p>
+                <div class="container col-12">
+                    <div class="row d-flex justify-content-around m-1">
+                        <h3 class="col-12">5-Day Forecast</h3>
+                        <!-- DAY 1 -->
+                        <div class="col-12 col-sm-12 col-md-3 col-lg-2 card text-light p-2 m-1 forecast-card">
+                            <h4 class="forecast-date"></h4>
+                            <img class="forecast-icon">
+                            <p>Temp: <span class="forecast-temp"></span></p>
+                            <p>Wind: <span class="forecast-wind"></span></p>
+                            <p>Humidity: <span class="forecast-humidity"></span></p>
+                        </div>
+    
+                        <!-- DAY 2 -->
+                        <div class="col-12 col-sm-12 col-md-3 col-lg-2 card text-light p-2 m-1 forecast-card">
+                            <h4 class="forecast-date"></h4>
+                            <img class="forecast-icon">
+                            <p>Temp: <span class="forecast-temp"></span></p>
+                            <p>Wind: <span class="forecast-wind"></span></p>
+                            <p>Humidity: <span class="forecast-humidity"></span></p>
+                        </div>
+    
+                        <!-- DAY 3 -->
+                        <div class="col-12 col-sm-12 col-md-3 col-lg-2 card text-light p-2 m-1 forecast-card">
+                            <h4 class="forecast-date"></h4>
+                            <img class="forecast-icon">
+                            <p>Temp: <span class="forecast-temp"></span></p>
+                            <p>Wind: <span class="forecast-wind"></span></p>
+                            <p>Humidity: <span class="forecast-humidity"></span></p>
+                        </div>
+    
+                        <!-- DAY 4 -->
+                        <div class="col-12 col-sm-12 col-md-3 col-lg-2 card text-light p-2 m-1 forecast-card">
+                            <h4 class="forecast-date"></h4>
+                            <img class="forecast-icon">
+                            <p>Temp: <span class="forecast-temp"></span></p>
+                            <p>Wind: <span class="forecast-wind"></span></p>
+                            <p>Humidity: <span class="forecast-humidity"></span></p>
+                        </div>
+    
+                        <!-- DAY 5 -->
+                        <div class="col-12 col-sm-12 col-md-3 col-lg-2 card text-light p-2 m-1 forecast-card">
+                            <h4 class="forecast-date"></h4>
+                            <img class="forecast-icon">
+                            <p>Temp: <span class="forecast-temp"></span></p>
+                            <p>Wind: <span class="forecast-wind"></span></p>
+                            <p>Humidity: <span class="forecast-humidity"></span></p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <footer>
+    <footer class="fixed-bottom">
         <a href="https://www.github.com/awidener3" target="_blank" rel="noopener noreferrer"><img src="./assets/images/GitHub-Mark-Light-64px.png" alt="GitHub logo"></a>
     </footer>
 
