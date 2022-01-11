@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <header class="jumbotron jumbotron-fluid">
+    <header class="jumbotron jumbotron-fluid custom-jumbotron text-light">
         <div class="container-fluid text-center">
             <h1 class="display-4">Weather Dashboard</h1>
             <p class="lead">All the weather info you need, without the news!</p>
@@ -19,12 +19,14 @@
 
     <div class="container-fluid">
         <div class="row">
-            <!-- LEFT COLUMN -->
+
+            <!-- === LEFT COLUMN === -->
             <div class="col-12 col-md-3">
                 <h2>Search for a City:</h2>
+
                 <!-- CITY SEARCH FORM -->
                 <form class="border-bottom mb-2">
-                    <input type="text" class="form-control mb-2" id="city-search" placeholder="Orlando">
+                    <input type="text" class="form-control mb-2" id="city-search" placeholder="Enter a City">
                     <button class="btn btn-primary btn-block mb-2" id="city-search-btn">Search</button>
                 </form>
 
@@ -32,68 +34,73 @@
                 <div id="search-buttons"></div>
             </div>
 
-            <!-- RIGHT COLUMN -->
+            <!-- === RIGHT COLUMN === -->
             <div class="col-12 col-md-9">
-                <div class="row">
-                    <div id="main-card" class="col-12 card p-3">
+                <div class="row p-3 m-1">
+                    <!-- MAIN CARD -->
+                    <div id="main-card" class=" card col-12 text-light p-3">
                         <h2><span id="main-card-city"></span> <span id="main-card-date"></span> <img id="main-card-icon"></h2>
-                        <p>Temp: <span id="main-card-temp"></span>&deg; F</p>
-                        <p>Wind: <span id="main-card-wind"></span> MPH</p>
-                        <p>Humidity: <span id="main-card-humidity"></span>%</p>
-                        <p>UVI: <span id="main-card-uv"></span></p>
+                        <p>Temp: <span id="main-card-temp"></span></p>
+                        <p>Wind: <span id="main-card-wind"></span></p>
+                        <p>Humidity: <span id="main-card-humidity"></span></p>
+                        <a href="https://www.epa.gov/sunsafety/uv-index-scale-0" target="_blank"><p>UVI: <span id="main-card-uv"></span></p></a>
                     </div>
                 </div>
-                <!-- 5-DAY FORECAST -->
+                <!-- ### 5-DAY FORECAST ### -->
                 <div class="row d-flex justify-content-around mt-3">
                     <h3 class="col-12">5-Day Forecast</h3>
                     <!-- DAY 1 -->
-                    <div class="col-12 col-sm-12 col-md-2 card bg-dark text-light p-2 m-1 forecast-card">
+                    <div class="col-12 col-sm-12 col-md-3 col-lg-2 card text-light p-2 m-1 forecast-card">
                         <h4 class="forecast-date"></h4>
                         <img class="forecast-icon">
-                        <p>Temp: <span class="forecast-temp">74</span>&deg; F</p>
-                        <p>Wind: <span class="forecast-wind">6.67</span> MPH</p>
-                        <p>Humidity: <span class="forecast-humidity">46</span>%</p>
+                        <p>Temp: <span class="forecast-temp">74</span></p>
+                        <p>Wind: <span class="forecast-wind">6.67</span></p>
+                        <p>Humidity: <span class="forecast-humidity">46</span></p>
                     </div>
 
                     <!-- DAY 2 -->
-                    <div class="col-12 col-sm-12 col-md-2 card bg-dark text-light p-2 m-1 forecast-card">
+                    <div class="col-12 col-sm-12 col-md-3 col-lg-2 card text-light p-2 m-1 forecast-card">
                         <h4 class="forecast-date"></h4>
                         <img class="forecast-icon">
-                        <p>Temp: <span class="forecast-temp">74</span>&deg; F</p>
-                        <p>Wind: <span class="forecast-wind">6.67</span> MPH</p>
-                        <p>Humidity: <span class="forecast-humidity">46</span>%</p>
+                        <p>Temp: <span class="forecast-temp">74</span></p>
+                        <p>Wind: <span class="forecast-wind">6.67</span></p>
+                        <p>Humidity: <span class="forecast-humidity">46</span></p>
                     </div>
 
                     <!-- DAY 3 -->
-                    <div class="col-12 col-sm-12 col-md-2 card bg-dark text-light p-2 m-1 forecast-card">
+                    <div class="col-12 col-sm-12 col-md-3 col-lg-2 card text-light p-2 m-1 forecast-card">
                         <h4 class="forecast-date"></h4>
                         <img class="forecast-icon">
-                        <p>Temp: <span class="forecast-temp">74</span>&deg; F</p>
-                        <p>Wind: <span class="forecast-wind">6.67</span> MPH</p>
-                        <p>Humidity: <span class="forecast-humidity">46</span>%</p>
+                        <p>Temp: <span class="forecast-temp">74</span></p>
+                        <p>Wind: <span class="forecast-wind">6.67</span></p>
+                        <p>Humidity: <span class="forecast-humidity">46</span></p>
                     </div>
 
                     <!-- DAY 4 -->
-                    <div class="col-12 col-sm-12 col-md-2 card bg-dark text-light p-2 m-1 forecast-card">
+                    <div class="col-12 col-sm-12 col-md-3 col-lg-2 card text-light p-2 m-1 forecast-card">
                         <h4 class="forecast-date"></h4>
                         <img class="forecast-icon">
-                        <p>Temp: <span class="forecast-temp">74</span>&deg; F</p>
-                        <p>Wind: <span class="forecast-wind">6.67</span> MPH</p>
-                        <p>Humidity: <span class="forecast-humidity">46</span>%</p>
+                        <p>Temp: <span class="forecast-temp">74</span></p>
+                        <p>Wind: <span class="forecast-wind">6.67</span></p>
+                        <p>Humidity: <span class="forecast-humidity">46</span></p>
                     </div>
 
                     <!-- DAY 5 -->
-                    <div class="col-12 col-sm-12 col-md-2 card bg-dark text-light p-2 m-1 forecast-card">
+                    <div class="col-12 col-sm-12 col-md-3 col-lg-2 card text-light p-2 m-1 forecast-card">
                         <h4 class="forecast-date"></h4>
                         <img class="forecast-icon">
-                        <p>Temp: <span class="forecast-temp">74</span>&deg; F</p>
-                        <p>Wind: <span class="forecast-wind">6.67</span> MPH</p>
-                        <p>Humidity: <span class="forecast-humidity">46</span>%</p>
+                        <p>Temp: <span class="forecast-temp">74</span></p>
+                        <p>Wind: <span class="forecast-wind">6.67</span></p>
+                        <p>Humidity: <span class="forecast-humidity">46</span></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <footer>
+        <a href="https://www.github.com/awidener3" target="_blank" rel="noopener noreferrer"><img src="./assets/images/GitHub-Mark-Light-64px.png" alt="GitHub logo"></a>
+    </footer>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

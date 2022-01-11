@@ -74,21 +74,37 @@ fetchWeather = (weatherData) => {
 }
 
 renderCurrentWeather = (coordinatesData, openWeatherData) => {
+    // sets card content
     mainCardCity.textContent = coordinatesData[0].name;
     mainCardIcon.src = `http://openweathermap.org/img/wn/${openWeatherData.current.weather[0].icon}@2x.png`
-    mainCardTemp.textContent = Math.trunc(openWeatherData.current.temp);
-    mainCardWind.textContent = openWeatherData.current.wind_speed;
-    mainCardHumidity.textContent = openWeatherData.current.humidity;
-    mainCardUv.textContent = openWeatherData.current.uvi;
+    mainCardTemp.textContent = `${Math.trunc(openWeatherData.current.temp)}\xB0F`;
+    mainCardWind.textContent = `${openWeatherData.current.wind_speed} mph`;
+    mainCardHumidity.textContent = `${openWeatherData.current.humidity}%`;
+    mainCardUv.textContent = Math.trunc(openWeatherData.current.uvi);
+
+    // clears previous classes
+    mainCardUv.parentElement.classList.remove('favorable');
+    mainCardUv.parentElement.classList.remove('moderate');
+    mainCardUv.parentElement.classList.remove('severe');
+    
+    // adds class based on uv index
+    if (mainCardUv.textContent <= 2) {
+        mainCardUv.parentElement.classList.add('favorable');
+    } else if (mainCardUv.textContent <= 7) {
+        mainCardUv.parentElement.classList.add('moderate')
+    } else {
+        mainCardUv.parentElement.classList.add('severe');
+    }
 };
 
 renderForecast = (openWeatherData) => {
     for (let i = 0; i < forecastCard.length; i++) {
+        // sets forecast card content
         forecastCardDate[i].textContent = moment().add((i+1), 'days').format('M/DD/YYYY');
         forecastCardIcon[i].src = `http://openweathermap.org/img/wn/${openWeatherData.daily[i].weather[0].icon}@2x.png`;
-        forecastCardTemp[i].textContent = Math.trunc(openWeatherData.daily[i].temp.day);
-        forecastCardWind[i].textContent = openWeatherData.daily[i].wind_speed;
-        forecastCardHumidity[i].textContent = openWeatherData.daily[i].humidity;
+        forecastCardTemp[i].textContent = `${Math.trunc(openWeatherData.daily[i].temp.day)}\xB0F`;
+        forecastCardWind[i].textContent = `${openWeatherData.daily[i].wind_speed} mph`;
+        forecastCardHumidity[i].textContent = `${openWeatherData.daily[i].humidity}%`;
     }
 };
 
@@ -96,6 +112,7 @@ appendToSearchHistory = (weatherData) => {
     let city = weatherData[0].name;
     let searchArray = JSON.parse(localStorage.getItem('searchHistory'));
 
+    // checks to see if the city is already in search history
     if (!searchArray.includes(city)) {
         searchArray.unshift(city);
         searchArray.pop();
@@ -108,6 +125,7 @@ appendToSearchHistory = (weatherData) => {
 renderSearchHistory = () => {
     searchedButtons.textContent = '';
 
+    // creates a button for each entry
     for (let i = 0; i < searchHistory.length; i++) {
         let button = document.createElement('button');
         button.textContent = searchHistory[i];
