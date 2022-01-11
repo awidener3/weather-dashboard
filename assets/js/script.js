@@ -26,8 +26,16 @@ const forecastCardHumidity = document.querySelectorAll('.forecast-humidity');
 let weatherApiUrl = 'https://api.openweathermap.org';
 let weatherApiKey = '&appid=3dcebf80294bbadbeab3a3d24374fc77';
 let oneCallEndpoint = '/data/2.5/onecall?';
-let searchHistory = ['New York', 'Chicago', 'Austin', 'San Francisco', 'Seattle', 'Denver', 'Atlanta', 'San Diego'];
+let defaultSearch = ['New York', 'Chicago', 'Austin', 'San Francisco', 'Seattle', 'Denver', 'Atlanta', 'San Diego'];
+// let searchHistory;
 let today = moment().format('M/DD/YYYY')
+
+// === LOCAL STORAGE === \\
+let searchHistory = JSON.parse(localStorage.getItem('searchHistory'));
+if (searchHistory === null) {
+    localStorage.setItem('searchHistory', JSON.stringify(defaultSearch));
+}
+
 let cityName = searchHistory[0];
 
 // === FUNCTIONS === \\
@@ -67,7 +75,6 @@ fetchWeather = (weatherData) => {
 
 renderCurrentWeather = (coordinatesData, openWeatherData) => {
     mainCardCity.textContent = coordinatesData[0].name;
-    // TODO: change 'http' to 'https' before finalize
     mainCardIcon.src = `http://openweathermap.org/img/wn/${openWeatherData.current.weather[0].icon}@2x.png`
     mainCardTemp.textContent = Math.trunc(openWeatherData.current.temp);
     mainCardWind.textContent = openWeatherData.current.wind_speed;
@@ -78,7 +85,6 @@ renderCurrentWeather = (coordinatesData, openWeatherData) => {
 renderForecast = (openWeatherData) => {
     for (let i = 0; i < forecastCard.length; i++) {
         forecastCardDate[i].textContent = moment().add((i+1), 'days').format('M/DD/YYYY');
-        // TODO: change 'http' to 'https' before finalizing
         forecastCardIcon[i].src = `http://openweathermap.org/img/wn/${openWeatherData.daily[i].weather[0].icon}@2x.png`;
         forecastCardTemp[i].textContent = Math.trunc(openWeatherData.daily[i].temp.day);
         forecastCardWind[i].textContent = openWeatherData.daily[i].wind_speed;
@@ -88,9 +94,13 @@ renderForecast = (openWeatherData) => {
 
 appendToSearchHistory = (weatherData) => {
     let city = weatherData[0].name;
-    if (!searchHistory.includes(city)) {
-        searchHistory.unshift(city);
-        searchHistory.pop();
+    let searchArray = JSON.parse(localStorage.getItem('searchHistory'));
+
+    if (!searchArray.includes(city)) {
+        searchArray.unshift(city);
+        searchArray.pop();
+        localStorage.setItem('searchHistory', JSON.stringify(searchArray));
+        searchHistory = JSON.parse(localStorage.getItem('searchHistory'));
     }
     renderSearchHistory();
 };
