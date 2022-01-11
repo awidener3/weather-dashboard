@@ -27,16 +27,12 @@ let weatherApiUrl = 'https://api.openweathermap.org';
 let weatherApiKey = '&appid=3dcebf80294bbadbeab3a3d24374fc77';
 let oneCallEndpoint = '/data/2.5/onecall?';
 let defaultSearch = ['New York', 'Chicago', 'Austin', 'San Francisco', 'Seattle', 'Denver', 'Atlanta', 'San Diego'];
-// let searchHistory;
 let today = moment().format('M/DD/YYYY')
 
 // === LOCAL STORAGE === \\
 let searchHistory = JSON.parse(localStorage.getItem('searchHistory'));
-if (searchHistory === null) {
-    localStorage.setItem('searchHistory', JSON.stringify(defaultSearch));
-}
 
-let cityName = searchHistory[0];
+let cityName;
 
 // === FUNCTIONS === \\
 
@@ -125,6 +121,13 @@ appendToSearchHistory = (weatherData) => {
 renderSearchHistory = () => {
     searchedButtons.textContent = '';
 
+    if (searchHistory === undefined || searchHistory === null) {
+        localStorage.setItem('searchHistory', JSON.stringify(defaultSearch));
+    }
+
+    searchHistory = JSON.parse(localStorage.getItem('searchHistory'));
+    cityName = searchHistory[0];
+
     // creates a button for each entry
     for (let i = 0; i < searchHistory.length; i++) {
         let button = document.createElement('button');
@@ -141,6 +144,8 @@ renderSearchHistory = () => {
         })
         searchedButtons.appendChild(button);
     }
+
+    // TODO: add a "reset to defaults" button that pulls back the original set of buttons
 };
 
 // === EVENT LISTENERS === \\
@@ -157,8 +162,8 @@ searchButton.addEventListener('click', function (event) {
 
 init = () => {
     mainCardDate.textContent = `${today}`
-    fetchCoordinates();
     renderSearchHistory();
+    fetchCoordinates();
 }
 
 init();
