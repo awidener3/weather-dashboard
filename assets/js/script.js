@@ -25,7 +25,6 @@ const searchedCitiesButton = document.querySelectorAll('.searched-cities-btn')
 let weatherApiUrl = 'https://api.openweathermap.org';
 let weatherApiKey = '&appid=3dcebf80294bbadbeab3a3d24374fc77';
 let oneCallEndpoint = '/data/2.5/onecall?';
-let geocodingEndpoint = '/geo/1.0/direct?';
 let searchHistory = ['New York', 'Chicago', 'Austin', 'San Francisco', 'Seattle', 'Denver', 'Atlanta', 'San Diego'];
 let today = moment().format('M/DD/YYYY')
 let defaultCity = 'orlando';
@@ -33,33 +32,39 @@ let cityName = defaultCity;
 
 // === FUNCTIONS === \\
 
-async function fetchWeather () {
+fetchCoordinates = () => {
+    let geocodingEndpoint = '/geo/1.0/direct?';
     let apiParam = `q=${cityName}`;
+    
+    fetch(`${weatherApiUrl}${geocodingEndpoint}${apiParam}${weatherApiKey}`)
+        .then(function (response) {
+            console.log(response);
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+            fetchWeather(data);
+        })
+}
 
-    try {
-        // read geocode
-        let geocodeResponse = await fetch(`${weatherApiUrl}${geocodingEndpoint}${apiParam}${weatherApiKey}`);
-        let coordinatesData = await geocodeResponse.json();
-        let latParam = await coordinatesData[0].lat;
-        let lonParam = await coordinatesData[0].lon;
-        
-        // read coordinates
-        let openWeatherResponse = await fetch(`${weatherApiUrl}${oneCallEndpoint}lat=${latParam}&lon=${lonParam}&units=imperial${weatherApiKey}`);
-        let openWeatherData = await openWeatherResponse.json();
+fetchWeather = (weatherData) => {
+    let latParam = weatherData[0].lat;
+    let lonParam = weatherData[0].lon;
 
-        // render results onto main card
-        renderCurrentWeather(coordinatesData, openWeatherData);
-        renderForecast(openWeatherData);
+    fetch(`${weatherApiUrl}${oneCallEndpoint}lat=${latParam}&lon=${lonParam}&units=imperial${weatherApiKey}`)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            appendToSearchHistory(weatherData);
+            renderCurrentWeather(weatherData, data);
+            renderForecast(data);
+        })
+}
 
-    } catch (err) {
-        alert('whoops!');
-    }
-};
-
-// TODO: create main card dynamically
 renderCurrentWeather = (coordinatesData, openWeatherData) => {
     mainCardCity.textContent = coordinatesData[0].name;
-    // TODO: change 'http' to 'https' before finaliz
+    // TODO: change 'http' to 'https' before finalize
     mainCardIcon.src = `http://openweathermap.org/img/wn/${openWeatherData.current.weather[0].icon}@2x.png`
     mainCardTemp.textContent = Math.trunc(openWeatherData.current.temp);
     mainCardWind.textContent = openWeatherData.current.wind_speed;
@@ -78,16 +83,6 @@ renderForecast = (openWeatherData) => {
     }
 };
 
-// TODO: create forecast cards dynamically
-// renderForecastCards = () => {
-//     let card = document.createElement('div');
-//     let cardDate = document.createElement('h4');
-//     let cardIcon = document.createElement('img');
-//     let cardTemp = document.createElement('p');
-//     let cardWind = document.createElement('p');
-//     let cardHumidity = document.createElement('p');
-// };
-
 renderSearchHistory = () => {
     searchedButtons.textContent = '';
 
@@ -102,16 +97,18 @@ renderSearchHistory = () => {
         button.classList.add('searched-cities-btn');
 
         searchedButtons.appendChild(button);
+
         button.addEventListener('click', function(event) {
             cityName = event.target.textContent
-            fetchWeather();
+            fetchCoordinates();
         })
     }
 };
 
-// TODO: Fix text remaining undercase and format for better UI
-appendToSearchHistory = (city) => {
-    searchHistory.unshift(city);
+// TODO: Fix text remaining under case and format for better UI
+appendToSearchHistory = (coordinatesData) => {
+    let citySearch = coordinatesData[0].name;
+    searchHistory.unshift(citySearch);
     searchHistory.pop();
 };
 
@@ -119,10 +116,12 @@ appendToSearchHistory = (city) => {
 // === EVENT LISTENERS === \\
 searchButton.addEventListener('click', function (event) {
     event.preventDefault();
+
     cityName = searchInput.value.toLowerCase().trim();
-    appendToSearchHistory(cityName);
+
     renderSearchHistory();
-    fetchWeather();
+    fetchCoordinates();
+
     searchInput.value = '';
 });
 
@@ -130,7 +129,7 @@ searchButton.addEventListener('click', function (event) {
 
 init = () => {
     mainCardDate.textContent = `${today}`
-    fetchWeather();
+    fetchCoordinates();
     renderSearchHistory();
 }
 
