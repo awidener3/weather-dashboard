@@ -105,13 +105,10 @@ renderSearchHistory = () => {
     }
 };
 
-// TODO: Fix text remaining under case and format for better UI
-appendToSearchHistory = (coordinatesData) => {
-    let citySearch = coordinatesData[0].name;
-    searchHistory.unshift(citySearch);
+appendToSearchHistory = (city) => {
+    searchHistory.unshift(city);
     searchHistory.pop();
 };
-
 
 // === EVENT LISTENERS === \\
 searchButton.addEventListener('click', function (event) {
