@@ -78,16 +78,6 @@ renderForecast = (openWeatherData) => {
     }
 };
 
-// TODO: create forecast cards dynamically
-// renderForecastCards = () => {
-//     let card = document.createElement('div');
-//     let cardDate = document.createElement('h4');
-//     let cardIcon = document.createElement('img');
-//     let cardTemp = document.createElement('p');
-//     let cardWind = document.createElement('p');
-//     let cardHumidity = document.createElement('p');
-// };
-
 renderSearchHistory = () => {
     searchedButtons.textContent = '';
 
@@ -109,12 +99,10 @@ renderSearchHistory = () => {
     }
 };
 
-// TODO: Fix text remaining undercase and format for better UI
 appendToSearchHistory = (city) => {
     searchHistory.unshift(city);
     searchHistory.pop();
 };
-
 
 // === EVENT LISTENERS === \\
 searchButton.addEventListener('click', function (event) {
